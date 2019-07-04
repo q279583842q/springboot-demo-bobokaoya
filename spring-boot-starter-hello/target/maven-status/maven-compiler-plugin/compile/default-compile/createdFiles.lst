@@ -1,0 +1,4 @@
+com\dpb\spring_boot_starter_hello\HelloServiceAutoConfiguration.class
+com\dpb\spring_boot_starter_hello\HelloServiceProperties.class
+META-INF\spring-configuration-metadata.json
+com\dpb\spring_boot_starter_hello\HelloService.class

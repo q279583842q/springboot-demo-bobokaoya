@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf基本使用</title>
+</head>
+<body>
+    <h1>基本使用</h1>
+    <h2>迭代语句</h2>
+    <table border="1"  style="border-collapse: collapse">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+        <tr th:each="u : ${list}">
+            <td th:text="${u.id}"></td>
+            <td th:text="${u.username}"></td>
+            <td th:text="${u.userage}"></td>
+        </tr>
+    </table>
+    <hr>
+    <h2>状态变量</h2>
+    <table border="1" style="border-collapse: collapse">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Index</th>
+            <th>Count</th>
+            <th>Size</th>
+            <th>Even</th>
+            <th>Odd</th>
+            <th>First</th>
+            <th>lase</th>
+        </tr>
+        <tr th:each="u,var : ${list}">
+            <td th:text="${u.id}"></td>
+            <td th:text="${u.username}"></td>
+            <td th:text="${u.userage}"></td>
+            <td th:text="${var.index}"></td>
+            <td th:text="${var.count}"></td>
+            <td th:text="${var.size}"></td>
+            <td th:text="${var.even}"></td>
+            <td th:text="${var.odd}"></td>
+            <td th:text="${var.first}"></td>
+            <td th:text="${var.last}"></td>
+        </tr>
+    </table>
+    <h2>th:each 迭代 Map</h2>
+    <table border="1"  style="border-collapse: collapse">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+        <tr th:each="maps : ${map}">
+            <td th:text="${maps.getKey()+':'+maps.getValue().id}"></td>
+            <td th:text="${maps.getKey()+':'+maps.getValue().username}"></td>
+            <td th:text="${maps.getKey()+':'+maps.getValue().userage}"></td>
+        </tr>
+    </table>
+    <th/>
+
+</body>
+</html>

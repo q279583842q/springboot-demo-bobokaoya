@@ -1,0 +1,51 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- 配置凭证匹配器 -->
+	<bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+		<!-- 指定散列算法和迭代次数 -->
+		<property name="hashAlgorithmName" value="md5"/>
+		<property name="hashIterations" value="1024"></property>
+	</bean>
+	
+	<!-- 配置自定义的Realm -->
+	<bean class="com.sxt.realm.SecurityRealm" id="securityRealm">
+		<!-- 配置对应的匹配器 -->
+		<property name="credentialsMatcher" ref="credentialsMatcher"/>
+	</bean>
+	
+	<!-- 配置SecurityManager -->
+	<bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" id="securityManager">
+		<!-- 配置Realm -->
+		<property name="realm" ref="securityRealm"/>
+	</bean>
+	
+	<!-- 注册ShiroFilterFactoryBean id必须要和web.xml中的targetBeanName一致  -->
+	<bean id="shiro" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- 注册SecurityManager -->
+ 		<property name="securityManager" ref="securityManager"/>
+ 		<!-- 登录地址 如果用户请求的的地址是 login.do 那么会对该地址认证-->
+ 		<property name="loginUrl" value="/login.do"/>
+ 		<!-- 登录成功的跳转地址 -->
+ 		<property name="successUrl" value="/jsp/success.jsp"/>
+ 		<!-- 访问未授权的页面跳转的地址 -->
+ 		<property name="unauthorizedUrl" value="/jsp/refuse.jsp"/>
+ 		<!-- 设置 过滤器链 -->
+ 		<property name="filterChainDefinitions">
+ 			<value>
+ 				<!--加载顺序从上往下。
+ 					authc需要认证
+ 					anon可以匿名访问的资源
+ 				 -->
+ 				/login.do=authc
+ 				/login.jsp=anon
+ 				/**=authc
+ 			</value>
+ 		</property>
+	</bean>
+</beans>

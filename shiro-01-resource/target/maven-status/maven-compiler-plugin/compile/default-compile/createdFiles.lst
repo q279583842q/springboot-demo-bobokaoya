@@ -1,0 +1,6 @@
+com\sxt\realm\SecurityRealm.class
+com\sxt\controller\LoginController.class
+com\sxt\pojo\User.class
+com\sxt\service\UserService.class
+com\sxt\service\impl\UserServiceImpl.class
+com\sxt\mapper\UserMapper.class

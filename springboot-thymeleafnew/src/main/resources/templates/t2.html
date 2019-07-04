@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf基本使用</title>
+</head>
+<body>
+    <h1>基本使用</h1>
+    <h2>string类型处理</h2>
+    <span th:text="${#strings.isEmpty(msg)}"></span>
+    <hr/>
+    <span th:text="${#strings.contains(msg,'9')}"></span>
+    <span th:text="${#strings.contains(msg,'t')}"></span>
+    <hr/>
+    <span th:text="${#strings.startsWith(s1,'a')}"></span>
+    <span th:text="${#strings.startsWith(s1,'T')}"></span>
+    <hr/>
+    <span th:text="${#strings.endsWith(s1,'a')}"></span>
+    <span th:text="${#strings.endsWith(s1,'g')}"></span>
+    <hr/>
+    <span th:text="${#strings.length(s1)}"></span>
+    <hr/>
+    <span th:text="${#strings.indexOf(s1,'b')}"></span>
+    <hr/>
+    <span th:text="${#strings.substring(s1,4)}"></span>
+    <span th:text="${#strings.substring(s1,4,6)}"></span>
+    <hr/>
+    <span th:text="${#strings.toUpperCase(s1)}"></span>
+    <span th:text="${#strings.toLowerCase(s2)}"></span>
+    <hr/>
+
+</body>
+</html>

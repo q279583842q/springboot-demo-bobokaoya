@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf基本使用</title>
+</head>
+<body>
+    <h1>基本使用</h1>
+    <h2>Date使用</h2>
+        <span th:text="${#dates.format(now)}"></span>
+    <hr>
+    <span th:text="${#dates.format(now,'yyyy-MM-dd')}"></span>
+    <hr>
+    <span th:text="${#dates.format(now,'yyyy-MM-dd hh:ss:mm')}"></span> <hr>
+    <span th:text="${#dates.format(now,'yyyy-MM-dd HH:ss:mm')}"></span> <hr>
+    <span th:text="${#dates.year(now)}"></span> <hr>
+    <span th:text="${#dates.month(now)}"></span> <hr>
+    <span th:text="${#dates.day(now)}"></span> <hr>
+    <span th:text="${#dates.dayOfWeek(now)}"></span> <hr>
+    <span th:text="${#dates.hour(now)}"></span> <hr>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- 关联数据属性文件 -->
+	<context:property-placeholder location="classpath:db.properties"/>
+	<!-- 开启扫描 -->
+	<context:component-scan base-package="com.sxt.service.impl"/>
+
+	<!-- 配置数据源 -->
+	<bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource" >
+		<property name="driverClass" value="${driver}"></property>
+		<property name="jdbcUrl" value="${url}"></property>
+		<property name="user" value="${names}"></property>
+		<property name="password" value="${password}"></property>
+	</bean>
+	<!-- 整合mybatis -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean" >
+		<!-- 关联数据源 -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- 关联mybatis的配置文件 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+		<!-- 添加别名设置 -->
+		<property name="typeAliasesPackage" value="com.sxt.pojo"/>
+	</bean>
+	<!-- 配置扫描的路径 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
+		<property name="basePackage" value="com.sxt.mapper"/>
+	</bean>
+</beans>

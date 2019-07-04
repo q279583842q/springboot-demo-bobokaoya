@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf基本使用</title>
+</head>
+<body>
+    <h1>基本使用</h1>
+    <h2>th:text使用</h2>
+    <span th:text="hello"></span><br>
+    <span th:text="${msg}"></span><br>
+    <h2>th:value使用</h2>
+    <input type="text" th:value="测试值"><br>
+    <input type="text" th:value="${msg}"><br>
+</body>
+</html>

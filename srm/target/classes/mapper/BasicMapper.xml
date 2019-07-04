@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sxt.sys.mapper.BasicMapper" >
+  <resultMap id="BaseResultMap" type="com.sxt.sys.pojo.Basic" >
+    <id column="basic_id" property="basicId" jdbcType="INTEGER" />
+    <result column="basic_name" property="basicName" jdbcType="VARCHAR" />
+    <result column="basic_desc" property="basicDesc" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="b1" property="b1" jdbcType="VARCHAR" />
+    <result column="b2" property="b2" jdbcType="VARCHAR" />
+    <result column="b3" property="b3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    basic_id, basic_name, basic_desc, parent_id, create_time, b1, b2, b3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sxt.sys.pojo.BasicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_basic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_basic
+    where basic_id = #{basicId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_basic
+    where basic_id = #{basicId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sxt.sys.pojo.BasicExample" >
+    delete from t_basic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sxt.sys.pojo.Basic" >
+    insert into t_basic (basic_id, basic_name, basic_desc, 
+      parent_id, create_time, b1, 
+      b2, b3)
+    values (#{basicId,jdbcType=INTEGER}, #{basicName,jdbcType=VARCHAR}, #{basicDesc,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{b1,jdbcType=VARCHAR}, 
+      #{b2,jdbcType=VARCHAR}, #{b3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sxt.sys.pojo.Basic" >
+    insert into t_basic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="basicId != null" >
+        basic_id,
+      </if>
+      <if test="basicName != null" >
+        basic_name,
+      </if>
+      <if test="basicDesc != null" >
+        basic_desc,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="b1 != null" >
+        b1,
+      </if>
+      <if test="b2 != null" >
+        b2,
+      </if>
+      <if test="b3 != null" >
+        b3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="basicId != null" >
+        #{basicId,jdbcType=INTEGER},
+      </if>
+      <if test="basicName != null" >
+        #{basicName,jdbcType=VARCHAR},
+      </if>
+      <if test="basicDesc != null" >
+        #{basicDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="b1 != null" >
+        #{b1,jdbcType=VARCHAR},
+      </if>
+      <if test="b2 != null" >
+        #{b2,jdbcType=VARCHAR},
+      </if>
+      <if test="b3 != null" >
+        #{b3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sxt.sys.pojo.BasicExample" resultType="java.lang.Integer" >
+    select count(*) from t_basic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_basic
+    <set >
+      <if test="record.basicId != null" >
+        basic_id = #{record.basicId,jdbcType=INTEGER},
+      </if>
+      <if test="record.basicName != null" >
+        basic_name = #{record.basicName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.basicDesc != null" >
+        basic_desc = #{record.basicDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.b1 != null" >
+        b1 = #{record.b1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.b2 != null" >
+        b2 = #{record.b2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.b3 != null" >
+        b3 = #{record.b3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_basic
+    set basic_id = #{record.basicId,jdbcType=INTEGER},
+      basic_name = #{record.basicName,jdbcType=VARCHAR},
+      basic_desc = #{record.basicDesc,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      b1 = #{record.b1,jdbcType=VARCHAR},
+      b2 = #{record.b2,jdbcType=VARCHAR},
+      b3 = #{record.b3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sxt.sys.pojo.Basic" >
+    update t_basic
+    <set >
+      <if test="basicName != null" >
+        basic_name = #{basicName,jdbcType=VARCHAR},
+      </if>
+      <if test="basicDesc != null" >
+        basic_desc = #{basicDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="b1 != null" >
+        b1 = #{b1,jdbcType=VARCHAR},
+      </if>
+      <if test="b2 != null" >
+        b2 = #{b2,jdbcType=VARCHAR},
+      </if>
+      <if test="b3 != null" >
+        b3 = #{b3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where basic_id = #{basicId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sxt.sys.pojo.Basic" >
+    update t_basic
+    set basic_name = #{basicName,jdbcType=VARCHAR},
+      basic_desc = #{basicDesc,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      b1 = #{b1,jdbcType=VARCHAR},
+      b2 = #{b2,jdbcType=VARCHAR},
+      b3 = #{b3,jdbcType=VARCHAR}
+    where basic_id = #{basicId,jdbcType=INTEGER}
+  </update>
+</mapper>

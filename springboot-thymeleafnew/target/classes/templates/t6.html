@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf基本使用</title>
+</head>
+<body>
+    <h1>基本使用</h1>
+    <h2>三大作用域取值</h2>
+
+    request：<br>
+    <span th:text="${#httpServletRequest.getAttribute('req')}"></span><br>
+    <span th:text="${#request.getAttribute('req')}"></span><br>
+    <span th:text="${req}"></span><br>
+    <hr>
+    session:<br>
+    <span th:text="${#httpSession.getAttribute('sess')}"></span><br>
+    <span th:text="${#session.getAttribute('sess')}"></span><br>
+    <hr>
+    servletContext:<br>
+    <span th:text="${#servletContext.getAttribute('app')}"></span><br>
+</body>
+</html>

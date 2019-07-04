@@ -1,0 +1,54 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+    <!-- 开启注解 -->
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <!-- 开启扫描 -->
+    <context:component-scan base-package="com.dpb.controller">
+        <!-- 只扫描指定路径下的controller注解 -->
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+
+    <!-- 配置freemarker -->
+
+    <!-- 2.定义模板属性 -->
+    <bean
+            class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <!-- 定义模板位置 -->
+        <property name="templateLoaderPath" value="/WEB-INF/ftl/" />
+        <!-- 编码方式 -->
+        <property name="defaultEncoding" value="utf-8" />
+        <!--设置属性值 -->
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">10</prop>
+                <prop key="locale">zh_CN</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="date_format">yyyy-MM-dd</prop>
+                <prop key="time_format">HH:mm:ss</prop>
+                <prop key="number_format">#.####</prop>
+            </props>
+        </property>
+    </bean>
+    <!-- 3.配置视图解析器 -->
+    <bean
+            class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <!-- 生成view的类 -->
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
+        <!-- 配置后缀 -->
+        <property name="suffix" value=".ftl" />
+        <!-- 支持request覆盖model -->
+        <property name="allowRequestOverride" value="true" />
+        <property name="allowSessionOverride" value="true" />
+        <property name="exposeRequestAttributes" value="true" />
+        <property name="exposeSessionAttributes" value="true" />
+        <property name="contentType" value="text/html;charset=utf-8" />
+    </bean>
+</beans>
+
